@@ -1,2 +1,15 @@
-@import './common';
-@import './example';
+@import './base/normalize';
+@import './base/reset';
+@import './base/visually-hidden';
+
+@import './utils/variables';
+@import './base/body';
+
+@import './components/container';
+@import './components/buttons';
+@import './components/modal';
+
+// @import './lauouts/home-page/';
+// @import './lauouts/my-library-page/';
+
+@import './utils/variables';
