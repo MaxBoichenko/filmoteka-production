@@ -1,15 +1,14 @@
 @import './base/normalize';
 @import './base/reset';
-@import './base/visually-hidden';
-
-@import './utils/variables';
 @import './base/body';
 
+@import './utils/variables';
+@import './utils/animations';
+
+@import './components/visually-hidden';
 @import './components/container';
 @import './components/buttons';
 @import './components/modal';
 
-// @import './lauouts/home-page/';
-// @import './lauouts/my-library-page/';
-
-@import './utils/variables';
+@import './layouts/footer';
+@import './layouts/header';
