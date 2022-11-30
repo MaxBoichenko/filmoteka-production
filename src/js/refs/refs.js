@@ -1,3 +1,4 @@
 export const refs = {
-  form: document.querySelector('.header__form-btn'),
+  cardsEl: document.querySelector('.gallery'),
+  form: document.querySelector('.header__form'),
 };
