@@ -1,2 +1,22 @@
 .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.gallery__item {
+}
+.gallery__film-image {
+  width: 100%;
+}
+.gallery_image {
+}
+.cgallery__film-info {
+}
+.gallery__film-name {
+}
+.gallery__film-subscription {
+}
+.gallery_film-vote {
+}
+.visually-hidden {
 }
