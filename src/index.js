@@ -1,2 +1,3 @@
 import './js/refs/refs';
-import './js/API/fetch';
+import './js/events/searchEvents';
+import './js/components/modal/modal';
