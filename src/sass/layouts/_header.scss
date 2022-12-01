@@ -1,10 +1,13 @@
 .header {
-  padding: 40px 32px 80px;
   color: #ffffff;
-  background-image: url(/src/images/main-bg-@1x.jpg);
+  background-image: url(/src/images/desktop/header_d_1x.jpeg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.container {
+  padding: 40px 0px 80px;
 }
 
 .logo {
@@ -14,6 +17,11 @@
   line-height: 1.16;
   letter-spacing: 0em;
   text-align: center;
+}
+
+.logo-icon {
+  fill: transparent;
+  stroke: currentColor;
 }
 .nav-container {
   display: flex;
@@ -74,7 +82,8 @@
 }
 
 input::placeholder {
-  font-weight: 400;
+  line-height: 1.14;
+  text-align: left;
   color: inherit;
 }
 
@@ -86,10 +95,11 @@ input::placeholder {
   // padding: 15px 0;
 
   // border: none;
-  background-color: transparent;
+  // background-color: transparent;
   // color: transparent;
 }
 
-.search-icon {
-  stroke: #ffffff;
-}
+// .search-icon {
+//   stroke: red;
+//   fill: red;
+// }
