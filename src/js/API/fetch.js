@@ -6,6 +6,9 @@ const { form, cardsEl } = refs;
 
 import template from '../../templates/cards.hbs';
 
+import Pagination from 'tui-pagination';
+import 'tui-pagination/dist/tui-pagination.css';
+
 window.addEventListener('load', onLoadPage);
 form.addEventListener('submit', onSubmitForm);
 
@@ -27,6 +30,8 @@ class MovieDatabase {
 
     this.films = null;
     this.allGenres = null;
+
+    this.query = null;
   }
 
   clearGallery() {
@@ -45,24 +50,28 @@ class MovieDatabase {
       console.error(error);
     }
   }
-  async fetchTrendingFilms() {
+  async fetchTrendingFilms(page) {
     try {
       const data = await axios.get(
-        `${this.#TRENDING_URL}?api_key=${this.#API_KEY}`
+        `${this.#TRENDING_URL}?api_key=${this.#API_KEY}&page=${page}`
       );
+
       this.page = data.data.page;
       this.totalPages = data.data.total_pages;
       this.films = data.data.results;
 
-      return data.data.results;
+      return data.data;
     } catch (error) {
       console.error(error);
     }
   }
-  async fetchFilms(input) {
+
+  async fetchFilms(page) {
     try {
       const data = await axios.get(
-        `${this.#SEARCH_URL}?api_key=${this.#API_KEY}&query=${input}`
+        `${this.#SEARCH_URL}?api_key=${this.#API_KEY}&query=${
+          this.query
+        }&page=${page}`
       );
 
       if (data.data.results.length) {
@@ -71,7 +80,7 @@ class MovieDatabase {
         this.films = data.data.results;
       }
 
-      return data.data.results;
+      return data.data;
     } catch (error) {
       console.error(error);
     }
@@ -79,8 +88,6 @@ class MovieDatabase {
 
   createCardsMarkup(data) {
     const objMarkup = data.map(el => {
-      console.log(el.release_date);
-
       const obj = {
         id: el.id,
         poster_path: `${
@@ -118,22 +125,11 @@ class MovieDatabase {
 
 const movieDatabase = new MovieDatabase();
 
-async function onLoadPage(event) {
-  try {
-    await movieDatabase.fetchGenres();
-    const data = await movieDatabase.fetchTrendingFilms();
-
-    const markup = movieDatabase.createCardsMarkup(data);
-    cardsEl.innerHTML = template(markup);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 async function onSubmitForm(event) {
   event.preventDefault();
 
   const query = event.target.formInput.value.trim();
+  movieDatabase.query = query;
 
   event.target.formInput.value = '';
 
@@ -141,14 +137,18 @@ async function onSubmitForm(event) {
     Notiflix.Notify.info('Введите что-то');
     return;
   }
-
+  pagination.off('afterMove', loadMoreTrendingFilms);
+  pagination.off('afterMove', loadMoreByQuery);
   try {
-    const films = await movieDatabase.fetchFilms(query);
+    const data = await movieDatabase.fetchFilms(page);
 
-    if (films.length) {
+    if (data.results.length) {
       movieDatabase.clearGallery();
+      pagination.reset(data.total_results);
+      pagination.on('afterMove', loadMoreByQuery);
+      console.log(data);
 
-      const markup = movieDatabase.createCardsMarkup(films);
+      const markup = movieDatabase.createCardsMarkup(data.results);
       cardsEl.innerHTML = template(markup);
     } else {
       Notiflix.Notify.info('Такие фильмы найти не удалось!');
@@ -156,4 +156,71 @@ async function onSubmitForm(event) {
   } catch (error) {
     console.log(error);
   }
+}
+// ПАГИНАЦИЯ
+
+const options = {
+  itemsPerPage: 20,
+  visiblePages: 4,
+  page: 1,
+  centerAlign: true,
+  firstItemClassName: 'tui-first-child',
+  lastItemClassName: 'tui-last-child',
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
+};
+
+const container = document.getElementById('pagination');
+
+const pagination = new Pagination(container, options);
+
+const page = pagination.getCurrentPage();
+
+async function onLoadPage(event) {
+  try {
+    await movieDatabase.fetchGenres();
+    const data = await movieDatabase.fetchTrendingFilms(page);
+
+    pagination.reset(data.total_results);
+    console.log(data);
+
+    const markup = movieDatabase.createCardsMarkup(data.results);
+    cardsEl.innerHTML = template(markup);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function loadMoreTrendingFilms(event) {
+  const currentPage = event.page;
+  console.log(currentPage);
+  const data = await movieDatabase.fetchTrendingFilms(currentPage);
+
+  const markup = movieDatabase.createCardsMarkup(data.results);
+  cardsEl.innerHTML = template(markup);
+}
+
+pagination.on('afterMove', loadMoreTrendingFilms);
+
+async function loadMoreByQuery(event) {
+  const currentPage = event.page;
+
+  const data = await movieDatabase.fetchFilms(currentPage);
+  const markup = movieDatabase.createCardsMarkup(data.results);
+  cardsEl.innerHTML = template(markup);
 }
