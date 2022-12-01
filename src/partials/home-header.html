@@ -1,6 +1,23 @@
 <header class="header">
   <div class="container">
-    <nav></nav>
+    <div class="nav-container">
+      <a href="#" class="logo link">
+        <svg class="logo-icon" width="24" height="24">
+          <use href="./images/icons.svg#icon-film-logo"></use>
+        </svg>
+        Filmoteka
+      </a>
+      <nav class="nav">
+        <ul class="nav-list list">
+          <li class="nav-list__item">
+            <a href="#" class="nav-list__link current link">HOME</a>
+          </li>
+          <li class="nav-list__item">
+            <a href="#" class="nav-list__link link">MY LIBRARY</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
     <form class="header__form">
       <div class="header__search">
         <input
@@ -9,7 +26,11 @@
           placeholder="Movie search"
           name="formInput"
         />
-        <button class="header__form-btn" type="submit">ПОИСК</button>
+        <button class="header__form-btn" type="submit">
+          <svg class="search-icon" width="12" height="12">
+            <use href="./images/icons.svg#icon-film-search"></use>
+          </svg>
+        </button>
       </div>
     </form>
   </div>
