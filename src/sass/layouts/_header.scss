@@ -40,6 +40,21 @@
   line-height: 1.16;
   text-align: center;
 }
+.nav-list__item {
+  transition-property: color;
+  transition-duration: 255ms;
+  transition-timing-function: var(--cubic-bezier);
+  &:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: var(--accent-color);
+    cursor: pointer;
+  }
+}
+
 .header .current {
   position: relative;
 
@@ -99,7 +114,27 @@ input::placeholder {
   // color: transparent;
 }
 
+<<<<<<< Updated upstream
 .search-icon {
   stroke: red;
   fill: transparent;
+=======
+// .search-icon {
+//   stroke: red;
+//   fill: red;
+// }
+.btn-container {
+  margin-top: -23px;
+  display: flex;
+  justify-content: center;
+}
+.header__watch-btn {
+}
+.btn-active {
+}
+.header__queue-btn {
+  margin-left: 16px;
+}
+.btn {
+>>>>>>> Stashed changes
 }
