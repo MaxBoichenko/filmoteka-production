@@ -21,6 +21,18 @@
 }
 
 .students__modal {
+  // position: absolute;
+  // display: flex;
+  // justify-content: center;
+  // text-align: center;
+  // align-items: center;
+  border: none;
   cursor: pointer;
-  text-decoration: underline;
+  background-color: transparent;
+  text-decoration-line: underline;
+
+  &:hover,
+  &:focus {
+    color: #ff6b08;
+  }
 }
