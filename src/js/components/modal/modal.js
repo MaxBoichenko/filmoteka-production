@@ -11,6 +11,19 @@ function onGalleryClick(event) {
     return;
   }
   openModal(event.target.closest('.gallery__item').id);
+  let voteEl = document.querySelector('.film-vote');
+  voteEl.textContent = Number.parseFloat(voteEl.textContent).toFixed(1);
+
+  let popularityEl = document.querySelector('.film-popularity');
+  popularityEl.textContent = Number.parseFloat(
+    popularityEl.textContent
+  ).toFixed(1);
+
+  let filmGenres = document.querySelector('.film-genre');
+  let filmGenresEl = document.querySelector('.gallery__film-subscription');
+  console.log(filmGenresEl.textContent);
+  filmGenres.textContent = filmGenresEl.textContent.split(' ', 1);
+  filmGenres.textContent = filmGenres.textContent.slice(0, -1);
 }
 
 function openModal(id) {
