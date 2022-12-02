@@ -95,11 +95,11 @@ input::placeholder {
   // padding: 15px 0;
 
   // border: none;
-  // background-color: transparent;
+  background-color: transparent;
   // color: transparent;
 }
 
-// .search-icon {
-//   stroke: red;
-//   fill: red;
-// }
+.search-icon {
+  stroke: red;
+  fill: transparent;
+}
