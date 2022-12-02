@@ -3,10 +3,17 @@
         <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" loading="lazy" alt="{{title}}"
             class="modal_image" />
     </div>
-    <div class="modal__film-info">
-        <p class="modal__film-name">{{title}}</p>
-        <p class="modal__film-subscription">{{genre_ids}} | {{release_date}}
-            <span class="modal_film-vote ">{{vote_average}}</span>
-        </p>
+          <div class="modal__film-info">
+        <li class="film-title">{{title}}</li>
+          <span class="film-info">Vote / Votes<li class="film-vote" id="votes">{{vote_average}}</li> / <li class="film-votes">{{vote_count}}</li></span>
+            <span class="film-info">Popularity<li class="film-popularity">{{popularity}}</li></span>
+                  <span class="film-info">Original Title<li class="film-original-title">{{original_title}}</li></span>
+        <span class="film-info">Genre<li class="film-genre">{{genre_ids}}</li></span>
+        <li class="film-overview">ABOUT<br/>{{overview}}</li></span>
+        <div class="filter__button">
+                <button type="submit" class="button-modal">add to Watched</button>
+    <button type="submit" class="button-modal">add to Queue</button>
     </div>
+    </div>
+
     </div>
