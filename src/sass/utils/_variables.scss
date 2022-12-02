@@ -1,11 +1,19 @@
-// :root {
-//   --main-font: ;
-//   --title-font: ;
-//   --number-font: ;
+:root {
+  --primary-font: Roboto, sans-serif;
 
-//   --primary-black-color: ;
+  --primary-font-size: 12px;
+  --primary-line-height: 1.17;
 
-//   --bg-color: ;
+  --primary-text-color: rgba(255, 255, 255, 1);
+  --secondary-text-color: rgba(84, 84, 84, 1);
+  --button-text-color: #FFFFFF;
+  --footer-text-color: #545454;
 
-//   --animation: ;
-// }
+  --main-bgc: #E5E5E5;
+  --second-bgc: #F7F7F7;
+
+  --accent-color: #FF6B01;
+  --main-accent-color: #ff6b08;
+  --title-color: #000000;
+  --timing-function: 250ms cubic-bezier(0.38, 0.53, 0.8, 0.71);
+}
