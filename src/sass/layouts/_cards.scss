@@ -1,7 +1,24 @@
+.gallery-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 0 32px;
+
+  @media screen and (min-width: 480px) {
+    width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 1280px;
+  }
+}
 .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  list-style: none;
 }
 .gallery__item {
 }
