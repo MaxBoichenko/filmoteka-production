@@ -1,0 +1,45 @@
+.btn {
+  font-family: var(--primary-text-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(18 / 14);
+  color: var(--primary-text-color);
+  padding: 12px 41px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--cubic-bezier);
+
+  &:hover {
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: var(--accent-color);
+    cursor: pointer;
+    border: 1px solid var(--accent-color);
+  }
+
+  &:disabled {
+    background-color: var(--second-bgc);
+  }
+}
+
+.btn-active {
+  font-family: var(--primary-text-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(18 / 14);
+  color: var(--primary-text-color);
+  padding: 12px 41px;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  background-color: var(--accent-color);
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--cubic-bezier);
+}

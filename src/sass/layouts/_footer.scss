@@ -13,6 +13,16 @@
   justify-content: center;
   align-items: center;
 }
+.footer__icon {
+  width: 32px;
+  height: 12px;
+  fill: var(--accent-color);
+  &:hover,
+  &:focus {
+    width: 33px;
+    height: 13px;
+  }
+}
 
 .list__item:not(:last-child) {
   padding-right: 10px;
@@ -21,6 +31,18 @@
 }
 
 .students__modal {
+  // position: absolute;
+  // display: flex;
+  // justify-content: center;
+  // text-align: center;
+  // align-items: center;
+  border: none;
   cursor: pointer;
-  text-decoration: underline;
+  background-color: transparent;
+  text-decoration-line: underline;
+
+  &:hover,
+  &:focus {
+    color: var(--accent-color);
+  }
 }

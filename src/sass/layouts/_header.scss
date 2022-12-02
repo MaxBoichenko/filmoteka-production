@@ -1,6 +1,6 @@
 .header {
   color: #ffffff;
-  background-image: url(/src/images/desktop/header_d_1x.jpeg);
+  background-image: url(/src/images/header/desktop/header_d_1x.jpeg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -40,6 +40,21 @@
   line-height: 1.16;
   text-align: center;
 }
+.nav-list__item {
+  transition-property: color;
+  transition-duration: 255ms;
+  transition-timing-function: var(--cubic-bezier);
+  &:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: var(--accent-color);
+    cursor: pointer;
+  }
+}
+
 .header .current {
   position: relative;
 
@@ -95,11 +110,26 @@ input::placeholder {
   // padding: 15px 0;
 
   // border: none;
-  // background-color: transparent;
+  background-color: transparent;
   // color: transparent;
 }
 
-// .search-icon {
-//   stroke: red;
-//   fill: red;
+.search-icon {
+  stroke: red;
+  fill: transparent;
+}
+
+.btn-container {
+  margin-top: -23px;
+  display: flex;
+  justify-content: center;
+}
+// .header__watch-btn {
+// }
+// .btn-active {
+// }
+.header__queue-btn {
+  margin-left: 16px;
+}
+// .btn {
 // }
