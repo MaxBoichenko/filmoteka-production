@@ -1,10 +1,28 @@
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
 @import 'node_modules/@glidejs/glide/src/assets/sass/glide.theme';
 
+.slider {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+  @media screen and (min-width: 480px) {
+    width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 1280px;
+    padding: 20px;
+  }
+}
+
 .slider-wrapper {
   background-color: rgb(247, 247, 247);
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   font-size: 13px;
+  width: 100%;
 
   @media screen and (max-width: 1023px) {
     display: none;
@@ -22,7 +40,7 @@
   text-align: center;
 
   color: #818181;
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 2;
@@ -32,6 +50,8 @@
 
 .slider-image {
   border-radius: 5px;
+  width: 394px;
+  height: 530px;
 }
 
 .rating-slider {
@@ -54,4 +74,3 @@
   // background-color: #ff6b08;
   // border-radius: 5px;
 }
-

@@ -1,13 +1,24 @@
 .header {
   color: #ffffff;
-  background-image: url(/src/images/header/desktop/header_d_1x.jpeg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  @media screen and (max-width: 480px) {
+    background-image: url(/src/images/header/mobile/header_m_1x.jpeg);
+  }
+
+  @media screen and (min-width: 480px) {
+    background-image: url(/src/images/header/tablet/header_tab_1x.jpeg);
+  }
+
+  @media screen and (min-width: 1200px) {
+    background-image: url(/src/images/header/desktop/header_d_1x.jpeg);
+  }
 }
 
 .container {
-  padding: 40px 0px 80px;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 
 .logo {
@@ -17,6 +28,16 @@
   line-height: 1.16;
   letter-spacing: 0em;
   text-align: center;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 }
 
 .logo-icon {
@@ -29,6 +50,9 @@
   margin: 0 auto;
   justify-content: space-between;
   margin-bottom: 40px;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 55px;
+  }
 }
 
 .nav-list {
@@ -73,6 +97,7 @@
 
 .header__search {
   text-align: center;
+  width: 100%;
 }
 
 .header__form {
@@ -84,7 +109,7 @@
 }
 
 .header__input {
-  min-width: 395px;
+  min-width: 240px;
 
   color: #ffffff;
 
@@ -94,6 +119,14 @@
   border-bottom: 0.7px solid currentColor;
 
   outline: unset;
+
+  @media screen and(min-width: 768px) {
+    min-width: 336px;
+    height: 20px;
+  }
+  @media screen and(min-width: 1200px) {
+    min-width: 395px;
+  }
 }
 
 input::placeholder {
@@ -105,13 +138,7 @@ input::placeholder {
 .header__form-btn {
   position: relative;
   left: -18px;
-  // bottom: -3px;
-
-  // padding: 15px 0;
-
-  // border: none;
   background-color: transparent;
-  // color: transparent;
 }
 
 .search-icon {
@@ -123,13 +150,11 @@ input::placeholder {
   margin-top: -23px;
   display: flex;
   justify-content: center;
+  @media screen and(max-width: 480px) {
+    margin-top: 65px;
+  }
 }
-// .header__watch-btn {
-// }
-// .btn-active {
-// }
+
 .header__queue-btn {
   margin-left: 16px;
 }
-// .btn {
-// }

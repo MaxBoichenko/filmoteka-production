@@ -142,10 +142,17 @@
 
 .tui-pagination .tui-prev {
   margin-right: 10px;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .tui-pagination .tui-next {
   margin-left: 10px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .tui-pagination .tui-ico-first {
