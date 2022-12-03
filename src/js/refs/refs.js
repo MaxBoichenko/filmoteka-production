@@ -5,4 +5,5 @@ export const refs = {
   closeModalBtn: document.querySelector('.modal__close-btn'),
   backdrop: document.querySelector('.backdrop'),
   modalContainer: document.querySelector('.modal__container'),
+  modalFilmContainer: document.querySelector('.modal__film'),
 };

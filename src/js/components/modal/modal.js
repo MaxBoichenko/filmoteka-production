@@ -2,7 +2,15 @@ import { movieDatabase } from '../../API/fetchService';
 import template from '../../../templates/modalFilm.hbs';
 
 import { refs } from '../../refs/refs';
-const { cardsEl, modalFilm, closeModalBtn, backdrop, modalContainer } = refs;
+import { logger } from 'handlebars';
+const {
+  cardsEl,
+  modalFilm,
+  closeModalBtn,
+  backdrop,
+  modalContainer,
+  modalFilmContainer,
+} = refs;
 
 cardsEl.addEventListener('click', onGalleryClick);
 
@@ -21,7 +29,7 @@ function onGalleryClick(event) {
 
   let filmGenres = document.querySelector('.film-genre');
   let filmGenresEl = document.querySelector('.gallery__film-subscription');
-  console.log(filmGenresEl.textContent);
+
   filmGenres.textContent = filmGenresEl.textContent.split(' ', 1);
   filmGenres.textContent = filmGenres.textContent.slice(0, -1);
 }
@@ -30,10 +38,11 @@ function openModal(id) {
   modalFilm.classList.remove('visually-hidden');
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('keydown', onEscapeKeyDown);
-
+  modalFilmContainer.addEventListener('click', onLibraryBtnCkick);
   const film = movieDatabase.films.some(el => {
     if (el.id === Number(id)) {
       modalContainer.innerHTML = template(el);
+      movieDatabase.modalFilm = el;
     }
   });
 }
@@ -55,4 +64,21 @@ function onEscapeKeyDown(event) {
   if (event.code === 'Escape') {
     hideModal();
   }
+}
+
+function onLibraryBtnCkick(event) {
+  if (
+    !(
+      event.target.classList.contains('js-watched') ||
+      event.target.classList.contains('js-queue')
+    )
+  ) {
+    return;
+  }
+
+  if (event.target.classList.contains('js-watched')) {
+    console.log(movieDatabase.modalFilm);
+    return;
+  }
+  console.log(movieDatabase.modalFilm);
 }

@@ -20,6 +20,7 @@ export class MovieDatabase {
     this.allGenres = null;
 
     this.query = null;
+    this.modalFilm = null;
   }
   async fetchGenres() {
     try {
