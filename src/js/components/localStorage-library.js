@@ -24,8 +24,6 @@ const renderWatched = () => {
   let dataToRender =
     JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? {};
 
-  cardsEl.innerHTML = template(dataToRender);
-  watchedBtn.classList.add('btn-active');
   movieDatabase.films = dataToRender;
   onLoadPage();
 };
@@ -37,6 +35,7 @@ async function onLoadPage(event) {
   } catch (error) {
     console.log(error);
   }
+  onWatchedBtnClick();
 }
 
 watchedBtn.addEventListener('click', onWatchedBtnClick);
