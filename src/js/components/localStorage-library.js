@@ -1,8 +1,11 @@
-import { movieDatabase } from '../../API/fetchService';
-import template from '../../../templates/modalFilm.hbs';
+import template from '../../templates/cards.hbs';
+import modalTemplates from '../../templates/modalFilm.hbs';
+import { FILMOTEKA_KEY_WATCHED } from './modal/modal';
+import { FILMOTEKA_KEY_QUEUE } from './modal/modal';
 
-import { refs } from '../../refs/refs';
+import { refs } from '../refs/refs';
 import { logger } from 'handlebars';
+
 const {
   cardsEl,
   modalFilm,
@@ -12,10 +15,35 @@ const {
   modalFilmContainer,
 } = refs;
 
-const watchedArray = [];
-const queueArray = [];
-export const FILMOTEKA_KEY_WATCHED = 'filmoteka-watched';
-export const FILMOTEKA_KEY_QUEUE = 'filmoteka-queue';
+const watchedBtn = document.querySelector('.header__watch-btn');
+const queueBtn = document.querySelector('.header__queue-btn');
+
+const renderWatched = () => {
+  let dataToRender =
+    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? {};
+  cardsEl.innerHTML = template(dataToRender);
+};
+renderWatched();
+
+const renderQueue = () => {
+  let dataToRender =
+    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE)) ?? {};
+  cardsEl.insertAdjacentHTML('beforeend', template(dataToRender));
+};
+renderQueue();
+
+watchedBtn.addEventListener('click', onWatchedBtnClick);
+function onWatchedBtnClick() {
+  let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
+  cardsEl.innerHTML = template(dataToRender);
+  console.log(dataToRender);
+}
+
+queueBtn.addEventListener('click', onQueueBtnClick);
+function onQueueBtnClick() {
+  let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
+  cardsEl.innerHTML = template(dataToRender);
+}
 
 cardsEl.addEventListener('click', onGalleryClick);
 
@@ -43,11 +71,12 @@ function openModal(id) {
   modalFilm.classList.remove('visually-hidden');
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('keydown', onEscapeKeyDown);
-  modalFilmContainer.addEventListener('click', onLibraryBtnClick);
-  const film = movieDatabase.films.some(el => {
+
+  const films = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
+  films.some(el => {
     if (el.id === Number(id)) {
-      modalContainer.innerHTML = template(el);
-      movieDatabase.modalFilm = el;
+      modalContainer.innerHTML = modalTemplates(el);
+      films.modalFilm = el;
     }
   });
 }
@@ -68,37 +97,5 @@ function hideModal() {
 function onEscapeKeyDown(event) {
   if (event.code === 'Escape') {
     hideModal();
-  }
-}
-
-function onLibraryBtnClick(event) {
-  if (
-    !(
-      event.target.classList.contains('js-watched') ||
-      event.target.classList.contains('js-queue')
-    )
-  ) {
-    return;
-  }
-  const currentModalFilm = movieDatabase.modalFilm;
-  if (event.target.classList.contains('js-watched')) {
-    if (watchedArray.includes(currentModalFilm)) {
-      return;
-    } else {
-      watchedArray.push(currentModalFilm);
-      localStorage.setItem(FILMOTEKA_KEY_WATCHED, JSON.stringify(watchedArray));
-      document.querySelector('.js-watched').textContent = 'Remove from Watched';
-    }
-    return;
-  }
-  if (event.target.classList.contains('js-queue')) {
-    if (queueArray.includes(currentModalFilm)) {
-      return;
-    } else {
-      queueArray.push(currentModalFilm);
-      localStorage.setItem(FILMOTEKA_KEY_QUEUE, JSON.stringify(queueArray));
-      document.querySelector('.js-queue').textContent = 'Remove from Queue';
-    }
-    return;
   }
 }
