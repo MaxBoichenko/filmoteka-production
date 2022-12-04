@@ -1,6 +1,8 @@
 
     <div class="modal__film-image">
         <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" loading="lazy" alt="{{title}}"
+         data-id="{{id}}"
+            onerror="this.onerror=null;this.src='https://image.tmdb.org/t/p/w500/hKFiWRygxSvnR7Axv1mFcxwpp2b.jpg';"
             class="modal_image" />
     </div>
           <div class="modal__film-info">
@@ -11,8 +13,8 @@
         <span class="film-info">Genre<li class="film-genre">{{genre_ids}}</li></span>
         <li class="film-overview">ABOUT<br/>{{overview}}</li></span>
         <div class="filter__button">
-                <button type="submit" class="button-modal">add to Watched</button>
-    <button type="submit" class="button-modal">add to Queue</button>
+                <button type="submit" class="button-modal  js-watched">add to Watched</button>
+    <button type="submit" class="button-modal js-queue">add to Queue</button>
     </div>
     </div>
 

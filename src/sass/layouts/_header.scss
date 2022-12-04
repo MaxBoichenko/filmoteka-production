@@ -1,24 +1,80 @@
 .header {
+position: relative;
   color: #ffffff;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   @media screen and (max-width: 480px) {
     background-image: url(/src/images/header/mobile/header_m_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/mobile/header_m_@2x.jpeg);
+    }
   }
 
   @media screen and (min-width: 480px) {
     background-image: url(/src/images/header/tablet/header_tab_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/tablet/header_tab_@2x.jpeg);
+    }
   }
 
   @media screen and (min-width: 1200px) {
     background-image: url(/src/images/header/desktop/header_d_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/desktop/header_d_@2x.jpeg);
+    }
+  }
+}
+
+.library {
+  color: #ffffff;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media screen and (max-width: 480px) {
+    background-image: url(/src/images/header-myLibrary/mobile/mob_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/mobile/mob_1@2x.jpeg);
+    }
+  }
+
+  @media screen and (min-width: 480px) {
+    background-image: url(/src/images/header-myLibrary/tablet/tabl_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/tablet/tabl_1@2x.jpeg);
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    background-image: url(/src/images/header-myLibrary/desktop/desc_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/desktop/desc_1@2x.jpeg);
+    }
   }
 }
 
 .container {
   padding-top: 40px;
   padding-bottom: 80px;
+  
 }
 
 .logo {
@@ -157,4 +213,46 @@ input::placeholder {
 
 .header__queue-btn {
   margin-left: 16px;
+}
+//------------------------------------------------------ligth-theme
+
+.change-theme {
+  &__btn {
+    position: absolute;
+    right: 145px;
+    bottom: 5px;
+
+    background-color: initial;
+    align-content: center;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px 12px;
+
+   
+  }
+
+  &__btn-dark {
+    display: none;
+  }
+
+  &__icon {
+    height: 18px;
+    width: 18px;
+    fill: #fff;
+  }
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(to bottom, blue 50%, yellow 50%);
+  opacity: 1;
 }

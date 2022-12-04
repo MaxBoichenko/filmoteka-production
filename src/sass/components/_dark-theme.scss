@@ -1,0 +1,87 @@
+body.dark-theme {
+    background-color: #262626;
+    color: #fff;
+
+    .header {
+        box-shadow: 0 0 12px 5px #ff6b0880;
+        // position: relative;
+    }
+
+    .footer {
+        background-color: #262626;
+        color: #fff;
+        box-shadow: 0 0 12px 5px #ff6b0880;
+
+        &__text {
+            color: inherit;
+        }
+    }
+.gallery__film-name{
+    color:#ffffff;
+}
+
+    .tui-page-btn {
+        color: inherit;
+
+        &:hover {
+            background-color: #ff6b08;
+        }
+    }
+
+    .modal__film {
+        background-color: #262626;
+        box-shadow: 0 0 12px 5px #ff6b0880;
+    }
+
+    .modal__close-btn {
+        color: #fff;
+    }
+    .modal__close-btn:hover{
+        color:var(--accent-color);
+    }
+
+
+    .film-popularity {
+        color: white;
+    }
+
+    .film-info {
+        color: white;
+    }
+.film-original-title{
+    color:#ffffff
+};
+.film-genre {
+    color:#ffffff
+};
+    
+
+    
+
+    .change-theme {
+        &__btn {
+            display: none;
+        }
+
+        &__btn-dark {
+            display: block;
+            position: absolute;
+            right: 145px;
+            bottom: 5px;
+
+            background-color: initial;
+            align-content: center;
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            padding: 8px 12px;
+
+           
+        }
+    }
+.button-modal {
+    color:#ffffff;
+    border-color:#ffffff;
+}
+    
+}
