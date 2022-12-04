@@ -17,8 +17,14 @@
 .gallery {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
   list-style: none;
+  padding-top: 60px;
+
+  @media screen and (max-width: 480px) {
+    padding-top: 20px;
+  }
 }
 .gallery__item {
 }
