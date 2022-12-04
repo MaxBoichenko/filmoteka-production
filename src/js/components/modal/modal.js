@@ -178,7 +178,7 @@ function onLibraryBtnClick(event) {
 function checkedLocalStorage(el) {
   const arrayWatched = localStorage.getItem(FILMOTEKA_KEY_WATCHED);
 
-  watchedBtn = document.querySelector('.js-watched');
+  let watchedBtn = document.querySelector('.js-watched');
 
   if (arrayWatched) {
     JSON.parse(arrayWatched).forEach(element => {
@@ -189,7 +189,7 @@ function checkedLocalStorage(el) {
     });
   }
   const arrayQueue = localStorage.getItem(FILMOTEKA_KEY_QUEUE);
-  queueBtn = document.querySelector('.js-queue');
+ let queueBtn = document.querySelector('.js-queue');
 
   if (arrayQueue) {
     JSON.parse(arrayQueue).forEach(element => {
