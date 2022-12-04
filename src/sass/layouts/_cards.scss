@@ -1,37 +1,82 @@
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .gallery-wrapper {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  padding: 0 32px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
 
   @media screen and (min-width: 480px) {
-    width: 480px;
+    min-width: 480px;
   }
   @media screen and (min-width: 768px) {
-    width: 768px;
+    min-width: 768px;
   }
   @media screen and (min-width: 1200px) {
     width: 1280px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 60px;
   }
 }
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
   list-style: none;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    gap: 16px;
+  }
 }
 .gallery__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media screen and (min-width: 768px) {
+    max-width: 336px;
+  }
 }
 .gallery__film-image {
-  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  object-fit: cover;
 }
-.gallery_image {
-}
+
 .gallery__film-info {
+  // padding: 10px;
+  flex-shrink: 1;
 }
 .gallery__film-name {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
 }
 .gallery__film-subscription {
+  font-size: 16px;
+  line-height: 1.875;
+  margin: 0;
 }
 .gallery_film-vote {
 }
