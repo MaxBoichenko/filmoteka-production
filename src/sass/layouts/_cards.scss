@@ -108,6 +108,14 @@ img {
   color: #ff6b08;
 }
 .gallery_film-vote {
+  color: var(--primary-text-color);
+  background: var(--accent-color);
+  border-radius: 5px;
+
+  padding: 1px 6px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
 }
 .visually-hidden {
 }
