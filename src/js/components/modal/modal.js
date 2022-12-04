@@ -36,12 +36,10 @@ function onGalleryClick(event) {
   if (!movieDatabase.modalFilm.genre_ids.length) {
     filmGenres.textContent = '----';
   } else {
-    const genres = movieDatabase.modalFilm.genre_ids
-      .map(
-        genreId =>
-          movieDatabase.allGenres.find(genre => genre.id === genreId).name
-      )
-      .slice(0, 2);
+    const genres = movieDatabase.modalFilm.genre_ids.map(
+      genreId =>
+        movieDatabase.allGenres.find(genre => genre.id === genreId).name
+    );
 
     filmGenres.textContent = genres.join(', ');
   }
