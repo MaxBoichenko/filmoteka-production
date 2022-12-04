@@ -14,6 +14,7 @@ const {
 
 const watchedArray = [];
 const queueArray = [];
+
 export const FILMOTEKA_KEY_WATCHED = 'filmoteka-watched';
 export const FILMOTEKA_KEY_QUEUE = 'filmoteka-queue';
 
@@ -85,6 +86,7 @@ function onLibraryBtnClick(event) {
   const currentModalFilm = movieDatabase.modalFilm;
   if (event.target.classList.contains('js-watched')) {
     if (watchedArray.includes(currentModalFilm)) {
+      document.querySelector('.js-watched').textContent = 'Add to Watched';
       return;
     } else {
       watchedArray.push(currentModalFilm);

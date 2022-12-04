@@ -72,11 +72,19 @@ function openModal(id) {
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('keydown', onEscapeKeyDown);
 
-  const films = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
-  films.some(el => {
+  const watchedFilms = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
+  const queueFilms = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
+  watchedFilms.some(el => {
     if (el.id === Number(id)) {
       modalContainer.innerHTML = modalTemplates(el);
-      films.modalFilm = el;
+      watchedFilms.modalFilm = el;
+    }
+  });
+
+  queueFilms.some(el => {
+    if (el.id === Number(id)) {
+      modalContainer.innerHTML = modalTemplates(el);
+      queueFilms.modalFilm = el;
     }
   });
 }
