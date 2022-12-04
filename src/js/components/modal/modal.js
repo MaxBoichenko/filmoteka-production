@@ -12,9 +12,6 @@ const {
   modalFilmContainer,
 } = refs;
 
-const watchedArray = [];
-const queueArray = [];
-
 export const FILMOTEKA_KEY_WATCHED = 'filmoteka-watched';
 export const FILMOTEKA_KEY_QUEUE = 'filmoteka-queue';
 
@@ -35,9 +32,19 @@ function onGalleryClick(event) {
   ).toFixed(1);
 
   const filmGenres = document.querySelector('.film-genre');
-  const filmGenresEl = document.querySelector('.gallery__film-subscription');
 
-  filmGenres.textContent = filmGenresEl.textContent.split(' ', 2);
+  if (!movieDatabase.modalFilm.genre_ids.length) {
+    filmGenres.textContent = '----';
+  } else {
+    const genres = movieDatabase.modalFilm.genre_ids
+      .map(
+        genreId =>
+          movieDatabase.allGenres.find(genre => genre.id === genreId).name
+      )
+      .slice(0, 2);
+
+    filmGenres.textContent = genres.join(', ');
+  }
 }
 
 function openModal(id) {
@@ -45,13 +52,16 @@ function openModal(id) {
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('keydown', onEscapeKeyDown);
   modalFilmContainer.addEventListener('click', onLibraryBtnClick);
-  document.body.style.position = 'fixed';
+
   const film = movieDatabase.films.some(el => {
     if (el.id === Number(id)) {
       modalContainer.innerHTML = template(el);
       movieDatabase.modalFilm = el;
+      checkedLocalStorage(el);
     }
   });
+
+  localStorage.getItem(FILMOTEKA_KEY_QUEUE);
 }
 
 function closeModal(event) {
@@ -66,7 +76,6 @@ function hideModal() {
   modalFilm.classList.add('visually-hidden');
   backdrop.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', onEscapeKeyDown);
-  document.body.style.position = '';
 }
 function onEscapeKeyDown(event) {
   if (event.code === 'Escape') {
@@ -84,25 +93,110 @@ function onLibraryBtnClick(event) {
     return;
   }
   const currentModalFilm = movieDatabase.modalFilm;
+
   if (event.target.classList.contains('js-watched')) {
-    if (watchedArray.includes(currentModalFilm)) {
-      document.querySelector('.js-watched').textContent = 'Add to Watched';
+    if (event.target.classList.contains('js-watched-remove')) {
+      let indexFilm = null;
+      const arrayWithWatchedFilms = JSON.parse(
+        localStorage.getItem(FILMOTEKA_KEY_WATCHED)
+      );
+
+      arrayWithWatchedFilms.forEach((element, index) => {
+        if (element.id === currentModalFilm.id) {
+          indexFilm = index;
+        }
+      });
+
+      arrayWithWatchedFilms.splice(indexFilm, 1);
+
+      localStorage.setItem(
+        FILMOTEKA_KEY_WATCHED,
+        JSON.stringify(arrayWithWatchedFilms)
+      );
+      watchedBtn.textContent = 'Add to watched';
+      watchedBtn.classList.remove('js-watched-remove');
+
       return;
-    } else {
-      watchedArray.push(currentModalFilm);
-      localStorage.setItem(FILMOTEKA_KEY_WATCHED, JSON.stringify(watchedArray));
-      document.querySelector('.js-watched').textContent = 'Remove from Watched';
     }
-    return;
+    let watchedArray = [];
+    const arrayWithWatchedFilms = JSON.parse(
+      localStorage.getItem(FILMOTEKA_KEY_WATCHED)
+    );
+
+    if (arrayWithWatchedFilms) {
+      watchedArray = watchedArray.concat(arrayWithWatchedFilms);
+    }
+
+    watchedBtn.textContent = 'Remove from watched';
+    watchedBtn.classList.add('js-watched-remove');
+
+    watchedArray.push(currentModalFilm);
+    localStorage.setItem(FILMOTEKA_KEY_WATCHED, JSON.stringify(watchedArray));
   }
+
   if (event.target.classList.contains('js-queue')) {
-    if (queueArray.includes(currentModalFilm)) {
+    if (event.target.classList.contains('js-queue-remove')) {
+      let indexFilm = null;
+      const arrayWithQueueFilms = JSON.parse(
+        localStorage.getItem(FILMOTEKA_KEY_QUEUE)
+      );
+
+      arrayWithQueueFilms.forEach((element, index) => {
+        if (element.id === currentModalFilm.id) {
+          indexFilm = index;
+        }
+      });
+
+      arrayWithQueueFilms.splice(indexFilm, 1);
+
+      localStorage.setItem(
+        FILMOTEKA_KEY_QUEUE,
+        JSON.stringify(arrayWithQueueFilms)
+      );
+      queueBtn.textContent = 'Add to queue';
+      queueBtn.classList.remove('js-queue-remove');
+
       return;
-    } else {
-      queueArray.push(currentModalFilm);
-      localStorage.setItem(FILMOTEKA_KEY_QUEUE, JSON.stringify(queueArray));
-      document.querySelector('.js-queue').textContent = 'Remove from Queue';
     }
-    return;
+    let queueArray = [];
+    const arrayWithQueueFilms = JSON.parse(
+      localStorage.getItem(FILMOTEKA_KEY_QUEUE)
+    );
+
+    if (arrayWithQueueFilms) {
+      queueArray = queueArray.concat(arrayWithQueueFilms);
+    }
+
+    queueBtn.textContent = 'Remove from queue';
+    queueBtn.classList.add('js-queue-remove');
+
+    queueArray.push(currentModalFilm);
+    localStorage.setItem(FILMOTEKA_KEY_QUEUE, JSON.stringify(queueArray));
+  }
+}
+
+function checkedLocalStorage(el) {
+  const arrayWatched = localStorage.getItem(FILMOTEKA_KEY_WATCHED);
+
+  watchedBtn = document.querySelector('.js-watched');
+
+  if (arrayWatched) {
+    JSON.parse(arrayWatched).forEach(element => {
+      if (element.id === el.id) {
+        watchedBtn.textContent = 'Remove from watched';
+        watchedBtn.classList.add('js-watched-remove');
+      }
+    });
+  }
+  const arrayQueue = localStorage.getItem(FILMOTEKA_KEY_QUEUE);
+  queueBtn = document.querySelector('.js-queue');
+
+  if (arrayQueue) {
+    JSON.parse(arrayQueue).forEach(element => {
+      if (element.id === el.id) {
+        queueBtn.textContent = 'Remove from queue';
+        queueBtn.classList.add('js-queue-remove');
+      }
+    });
   }
 }

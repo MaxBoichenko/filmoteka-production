@@ -22,27 +22,25 @@ const renderWatched = () => {
   let dataToRender =
     JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? {};
   cardsEl.innerHTML = template(dataToRender);
+  watchedBtn.classList.add('btn-active');
 };
 renderWatched();
-
-const renderQueue = () => {
-  let dataToRender =
-    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE)) ?? {};
-  cardsEl.insertAdjacentHTML('beforeend', template(dataToRender));
-};
-renderQueue();
 
 watchedBtn.addEventListener('click', onWatchedBtnClick);
 function onWatchedBtnClick() {
   let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
   cardsEl.innerHTML = template(dataToRender);
   console.log(dataToRender);
+  watchedBtn.classList.add('btn-active');
+  queueBtn.classList.remove('btn-active');
 }
 
 queueBtn.addEventListener('click', onQueueBtnClick);
 function onQueueBtnClick() {
   let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
   cardsEl.innerHTML = template(dataToRender);
+  watchedBtn.classList.remove('btn-active');
+  queueBtn.classList.add('btn-active');
 }
 
 cardsEl.addEventListener('click', onGalleryClick);
