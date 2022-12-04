@@ -1,4 +1,5 @@
 .header {
+position: relative;
   color: #ffffff;
   background-position: center;
   background-size: cover;
@@ -19,6 +20,7 @@
 .container {
   padding-top: 40px;
   padding-bottom: 80px;
+  
 }
 
 .logo {
@@ -157,4 +159,32 @@ input::placeholder {
 
 .header__queue-btn {
   margin-left: 16px;
+}
+//------------------------------------------------------ligth-theme
+
+.change-theme {
+  &__btn {
+    position: absolute;
+    right: 145px;
+    bottom: 5px;
+
+    background-color: initial;
+    align-content: center;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px 12px;
+
+   
+  }
+
+  &__btn-dark {
+    display: none;
+  }
+
+  &__icon {
+    height: 18px;
+    width: 18px;
+    fill: #fff;
+  }
 }
