@@ -5,14 +5,68 @@
   background-repeat: no-repeat;
   @media screen and (max-width: 480px) {
     background-image: url(/src/images/header/mobile/header_m_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/mobile/header_m_@2x.jpeg);
+    }
   }
 
   @media screen and (min-width: 480px) {
     background-image: url(/src/images/header/tablet/header_tab_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/tablet/header_tab_@2x.jpeg);
+    }
   }
 
   @media screen and (min-width: 1200px) {
     background-image: url(/src/images/header/desktop/header_d_1x.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header/desktop/header_d_@2x.jpeg);
+    }
+  }
+}
+
+.library {
+  color: #ffffff;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media screen and (max-width: 480px) {
+    background-image: url(/src/images/header-myLibrary/mobile/mob_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/mobile/mob_1@2x.jpeg);
+    }
+  }
+
+  @media screen and (min-width: 480px) {
+    background-image: url(/src/images/header-myLibrary/tablet/tabl_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/tablet/tabl_1@2x.jpeg);
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    background-image: url(/src/images/header-myLibrary/desktop/desc_1.jpeg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(/src/images/header-myLibrary/desktop/desc_1@2x.jpeg);
+    }
   }
 }
 
