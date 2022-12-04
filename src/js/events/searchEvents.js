@@ -1,4 +1,5 @@
 import { movieDatabase } from '../API/fetchService';
+import { scrollTo } from '../components/go-to-top';
 
 import template from '../../templates/cards.hbs';
 import Notiflix from 'notiflix';
@@ -63,6 +64,7 @@ async function loadMoreTrendingFilms(event) {
 
   const markup = movieDatabase.createCardsMarkup(data.results);
   cardsEl.innerHTML = template(markup);
+  scrollTo(0, 400);
 }
 
 pagination.on('afterMove', loadMoreTrendingFilms);
@@ -73,4 +75,5 @@ async function loadMoreByQuery(event) {
   const data = await movieDatabase.fetchFilms(currentPage);
   const markup = movieDatabase.createCardsMarkup(data.results);
   cardsEl.innerHTML = template(markup);
+  scrollTo(0, 400);
 }
