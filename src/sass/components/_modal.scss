@@ -96,7 +96,7 @@
 }
 
 .film-vote {
-  margin-left: 88px;
+  margin-left: 22%;
   font-weight: 500;
   font-size: 12px;
   margin-right: 3px;
@@ -105,8 +105,7 @@
   background: var(--accent-color);
   border-radius: 5px;
   display: block;
-  padding: 1px 8px;
-  text-align: left;
+  padding: 1px 6px;
 }
 
 .film-votes {
@@ -119,10 +118,11 @@
   border-radius: 5px;
   display: block;
   padding: 1px 8px;
+  max-width: 30px;
 }
 
 .film-popularity {
-  margin-left: 99px;
+  margin-left: 25.5%;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
