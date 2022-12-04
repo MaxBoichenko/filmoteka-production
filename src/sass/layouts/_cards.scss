@@ -38,7 +38,8 @@ img {
   }
 
   @media screen and (min-width: 1200px) {
-    gap: 16px;
+    gap: 32px;
+    column-gap: 16px;
   }
 }
 .gallery__item {
@@ -62,12 +63,13 @@ img {
 
   &:hover,
   &:focus {
-    transition-property: box-shadow;
-    transition-duration: 1000ms;
+    transition-property: box-shadow, transform;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    box-shadow: 0 0 50px orange;
 
     transform: translateY(-10px);
-
-    animation-iteration-count: infinite;
     transform: translateY(-10px);
   }
 }
