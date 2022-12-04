@@ -44,6 +44,7 @@ function openModal(id) {
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('keydown', onEscapeKeyDown);
   modalFilmContainer.addEventListener('click', onLibraryBtnClick);
+  document.body.style.position = 'fixed';
   const film = movieDatabase.films.some(el => {
     if (el.id === Number(id)) {
       modalContainer.innerHTML = template(el);
@@ -64,6 +65,7 @@ function hideModal() {
   modalFilm.classList.add('visually-hidden');
   backdrop.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', onEscapeKeyDown);
+  document.body.style.position = '';
 }
 function onEscapeKeyDown(event) {
   if (event.code === 'Escape') {
