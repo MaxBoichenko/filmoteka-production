@@ -1,4 +1,4 @@
-import template from '../../templates/cards.hbs';
+import template from '../../templates/cards-library.hbs';
 import modalTemplates from '../../templates/modalFilm.hbs';
 import { FILMOTEKA_KEY_WATCHED } from './modal/modal';
 import { FILMOTEKA_KEY_QUEUE } from './modal/modal';
@@ -30,7 +30,6 @@ watchedBtn.addEventListener('click', onWatchedBtnClick);
 function onWatchedBtnClick() {
   let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
   cardsEl.innerHTML = template(dataToRender);
-  console.log(dataToRender);
   watchedBtn.classList.add('btn-active');
   queueBtn.classList.remove('btn-active');
 }
