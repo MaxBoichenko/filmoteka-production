@@ -113,8 +113,8 @@ function onLibraryBtnClick(event) {
         FILMOTEKA_KEY_WATCHED,
         JSON.stringify(arrayWithWatchedFilms)
       );
-      watchedBtn.textContent = 'Add to watched';
-      watchedBtn.classList.remove('js-watched-remove');
+      movieDatabase.watchedBtn.textContent = 'Add to watched';
+      movieDatabase.watchedBtn.classList.remove('js-watched-remove');
 
       return;
     }
@@ -127,8 +127,8 @@ function onLibraryBtnClick(event) {
       watchedArray = watchedArray.concat(arrayWithWatchedFilms);
     }
 
-    watchedBtn.textContent = 'Remove from watched';
-    watchedBtn.classList.add('js-watched-remove');
+    movieDatabase.watchedBtn.textContent = 'Remove from watched';
+    movieDatabase.watchedBtn.classList.add('js-watched-remove');
 
     watchedArray.push(currentModalFilm);
     localStorage.setItem(FILMOTEKA_KEY_WATCHED, JSON.stringify(watchedArray));
@@ -153,8 +153,8 @@ function onLibraryBtnClick(event) {
         FILMOTEKA_KEY_QUEUE,
         JSON.stringify(arrayWithQueueFilms)
       );
-      queueBtn.textContent = 'Add to queue';
-      queueBtn.classList.remove('js-queue-remove');
+      movieDatabase.queueBtn.textContent = 'Add to queue';
+      movieDatabase.queueBtn.classList.remove('js-queue-remove');
 
       return;
     }
@@ -167,8 +167,8 @@ function onLibraryBtnClick(event) {
       queueArray = queueArray.concat(arrayWithQueueFilms);
     }
 
-    queueBtn.textContent = 'Remove from queue';
-    queueBtn.classList.add('js-queue-remove');
+    movieDatabase.queueBtn.textContent = 'Remove from queue';
+    movieDatabase.queueBtn.classList.add('js-queue-remove');
 
     queueArray.push(currentModalFilm);
     localStorage.setItem(FILMOTEKA_KEY_QUEUE, JSON.stringify(queueArray));
@@ -180,6 +180,8 @@ function checkedLocalStorage(el) {
 
   let watchedBtn = document.querySelector('.js-watched');
 
+  movieDatabase.watchedBtn = watchedBtn;
+
   if (arrayWatched) {
     JSON.parse(arrayWatched).forEach(element => {
       if (element.id === el.id) {
@@ -189,7 +191,8 @@ function checkedLocalStorage(el) {
     });
   }
   const arrayQueue = localStorage.getItem(FILMOTEKA_KEY_QUEUE);
- let queueBtn = document.querySelector('.js-queue');
+  let queueBtn = document.querySelector('.js-queue');
+  movieDatabase.queueBtn = queueBtn;
 
   if (arrayQueue) {
     JSON.parse(arrayQueue).forEach(element => {

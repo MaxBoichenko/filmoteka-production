@@ -21,6 +21,8 @@ export class MovieDatabase {
 
     this.query = null;
     this.modalFilm = null;
+    this.queueBtn = null;
+    this.watchedBtn = null;
   }
   async fetchGenres() {
     try {
