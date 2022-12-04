@@ -1,0 +1,57 @@
+.library-plug {
+  height: 40vh;
+  background-image: url('../images/empty/plug.png');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 50px;
+  background-size: contain;
+
+  @media screen and(min-width: 768px) {
+    height: 48vh;
+  }
+}
+
+.library-container {
+  text-align: center;
+}
+
+.title-queue {
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 2em;
+  letter-spacing: 2px;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgb(81, 28, 0),
+    rgb(238, 238, 238),
+    rgb(255, 98, 0)
+  );
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+
+  @keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
+
+  @media screen and(max-width: 480px) {
+    margin-top: 40px;
+  }
+
+  @media screen and(min-width: 768px) {
+    font-size: 35px;
+  }
+
+  @media screen and(min-width: 1200px) {
+    font-size: 50px;
+  }
+}

@@ -1,39 +1,121 @@
-.gallery-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  padding: 0 32px;
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 
-  @media screen and (min-width: 480px) {
-    width: 480px;
-  }
-  @media screen and (min-width: 768px) {
-    width: 768px;
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    width: 336px;
+    height: 455px;
   }
   @media screen and (min-width: 1200px) {
-    width: 1280px;
+    width: 395px;
+    height: 574px;
   }
 }
+
+.gallery-wrapper {
+}
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  padding-left: 15px;
+  padding-right: 15px;
   list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding-top: 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding-top: 60px;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    gap: 32px;
+    column-gap: 16px;
+  }
 }
 .gallery__item {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+  @media screen and (max-width: 480px) {
+    max-width: 280px;
+  }
+
+  @media screen and (min-width: 480px) and (max-width: 1200px) {
+    max-width: 336px;
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 395px;
+  }
+
+  &:hover,
+  &:focus {
+    transition-property: box-shadow, transform;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    box-shadow: 0 0 50px orange;
+
+    transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
 }
 .gallery__film-image {
-  width: 100%;
 }
-.gallery_image {
-}
+
 .gallery__film-info {
+  padding-left: 3px;
+  @media screen and (max-width: 480px) {
+    max-width: 270px;
+  }
+
+  @media screen and (min-width: 480px) and (max-width: 1200px) {
+    max-width: 330px;
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 380px;
+  }
 }
 .gallery__film-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
 }
 .gallery__film-subscription {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.875;
+  margin: 0;
+  color: #ff6b08;
 }
 .gallery_film-vote {
+  color: var(--primary-text-color);
+  background: var(--accent-color);
+  border-radius: 5px;
+
+  padding: 1px 6px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
 }
 .visually-hidden {
 }
