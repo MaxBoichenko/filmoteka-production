@@ -1,5 +1,6 @@
 import { movieDatabase } from '../../API/fetchService';
 import template from '../../../templates/modalFilm.hbs';
+import cardsHBS from '../../../templates/cards-library.hbs';
 
 import { refs } from '../../refs/refs';
 import { logger } from 'handlebars';
@@ -74,6 +75,41 @@ function hideModal() {
   modalFilm.classList.add('visually-hidden');
   backdrop.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', onEscapeKeyDown);
+
+  const chooseBtn = document.querySelector('.btn-active');
+
+  if (chooseBtn) {
+    if (chooseBtn.classList.contains('header__watch-btn')) {
+      let dataToRenderWatched = JSON.parse(
+        localStorage.getItem(FILMOTEKA_KEY_WATCHED)
+      );
+
+      if (dataToRenderWatched.length === 0) {
+        cardsEl.innerHTML =
+          '<h1 class="title-queue">Your watched is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+        return;
+      }
+      let markupWatched = movieDatabase.createCardsMarkup(dataToRenderWatched);
+      cardsEl.innerHTML = cardsHBS(markupWatched);
+    }
+    if (chooseBtn.classList.contains('header__queue-btn')) {
+      let dataToRenderQueue = JSON.parse(
+        localStorage.getItem(FILMOTEKA_KEY_QUEUE)
+      );
+
+      console.log(dataToRenderQueue);
+
+      if (dataToRenderQueue.length === 0) {
+        cardsEl.innerHTML =
+          '<h1 class="title-queue">Your queue is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+        return;
+      }
+
+      const markupQueue = movieDatabase.createCardsMarkup(dataToRenderQueue);
+      console.log(markupQueue);
+      cardsEl.innerHTML = cardsHBS(markupQueue);
+    }
+  }
 }
 function onEscapeKeyDown(event) {
   if (event.code === 'Escape') {
