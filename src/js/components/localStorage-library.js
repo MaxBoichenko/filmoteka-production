@@ -50,9 +50,8 @@ async function onLoadPage(event) {
 }
 
 export function onWatchedBtnClick() {
-  let dataToRenderWatched = JSON.parse(
-    localStorage.getItem(FILMOTEKA_KEY_WATCHED)
-  );
+  let dataToRenderWatched =
+    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? [];
 
   watchedBtn.classList.add('btn-active');
   queueBtn.classList.remove('btn-active');
@@ -67,7 +66,8 @@ export function onWatchedBtnClick() {
 }
 
 export function onQueueBtnClick() {
-  let dataToRenderQueue = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
+  let dataToRenderQueue =
+    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE)) ?? [];
 
   watchedBtn.classList.remove('btn-active');
   queueBtn.classList.add('btn-active');
