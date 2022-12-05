@@ -59,7 +59,7 @@ export function onWatchedBtnClick() {
 
   if (!dataToRenderWatched.length) {
     cardsEl.innerHTML =
-      '<h1 class="title-queue">Your watched is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+      '<h1 class="title-queue">Your watched list is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
     return;
   }
   let markupWatched = movieDatabase.createCardsMarkup(dataToRenderWatched);
