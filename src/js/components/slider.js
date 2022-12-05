@@ -29,5 +29,4 @@ function renderTrendy() {
 
 function renderSliderFilms(articles) {
   sliderContainer.innerHTML = filmsCardSliderTpl(articles);
-
 }

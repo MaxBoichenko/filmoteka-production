@@ -20,14 +20,10 @@ const {
 const watchedBtn = document.querySelector('.header__watch-btn');
 const queueBtn = document.querySelector('.header__queue-btn');
 
-const renderWatched = () => {
-  let dataToRender =
-    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? {};
+window.addEventListener('load', onLoadPage);
 
-  movieDatabase.films = dataToRender;
-  onLoadPage();
-};
-renderWatched();
+watchedBtn.addEventListener('click', onWatchedBtnClick);
+queueBtn.addEventListener('click', onQueueBtnClick);
 
 async function onLoadPage(event) {
   try {
@@ -35,100 +31,53 @@ async function onLoadPage(event) {
   } catch (error) {
     console.log(error);
   }
-  onWatchedBtnClick();
-}
-
-watchedBtn.addEventListener('click', onWatchedBtnClick);
-function onWatchedBtnClick() {
-  let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
-  const markup = movieDatabase.createCardsMarkup(dataToRender);
-  cardsEl.innerHTML = template(markup);
   watchedBtn.classList.add('btn-active');
-  queueBtn.classList.remove('btn-active');
-}
 
-queueBtn.addEventListener('click', onQueueBtnClick);
-function onQueueBtnClick() {
-  let dataToRender = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
+  let dataToRenderOnLoad =
+    JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED)) ?? [];
 
-  const markup = movieDatabase.createCardsMarkup(dataToRender);
-  cardsEl.innerHTML = template(markup);
-  watchedBtn.classList.remove('btn-active');
-  queueBtn.classList.add('btn-active');
-}
+  let dataQueue = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE)) ?? [];
 
-cardsEl.addEventListener('click', onGalleryClick);
+  movieDatabase.films = dataToRenderOnLoad.concat(dataQueue);
 
-function onGalleryClick(event) {
-  if (!event.target.closest('.gallery__item-library')) {
+  if (dataToRenderOnLoad.length) {
+    const markup = movieDatabase.createCardsMarkup(dataToRenderOnLoad);
+    cardsEl.innerHTML = template(markup);
     return;
   }
-  openModalLib(event.target.closest('.gallery__item-library').id);
+  cardsEl.innerHTML =
+    '<h1 class="title-queue">Your queue is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+}
 
-  const btnQueueLib = document.querySelector('.js-queue');
-  const btnWatchedLib = document.querySelector('.js-watched');
-  btnQueueLib.classList.add('visually-hidden');
-  btnWatchedLib.classList.add('visually-hidden');
+export function onWatchedBtnClick() {
+  let dataToRenderWatched = JSON.parse(
+    localStorage.getItem(FILMOTEKA_KEY_WATCHED)
+  );
 
-  const voteEl = document.querySelector('.film-vote');
-  voteEl.textContent = Number.parseFloat(voteEl.textContent).toFixed(1);
+  watchedBtn.classList.add('btn-active');
+  queueBtn.classList.remove('btn-active');
 
-  const popularityEl = document.querySelector('.film-popularity');
-  popularityEl.textContent = Number.parseFloat(
-    popularityEl.textContent
-  ).toFixed(1);
-
-  const filmGenres = document.querySelector('.film-genre');
-
-  if (!movieDatabase.modalFilm.genre_ids.length) {
-    filmGenres.textContent = '----';
-  } else {
-    const genres = movieDatabase.modalFilm.genre_ids.map(
-      genreId =>
-        movieDatabase.allGenres.find(genre => genre.id === genreId).name
-    );
-
-    filmGenres.textContent = genres.join(', ');
+  if (!dataToRenderWatched.length) {
+    cardsEl.innerHTML =
+      '<h1 class="title-queue">Your watched is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+    return;
   }
+  let markupWatched = movieDatabase.createCardsMarkup(dataToRenderWatched);
+  cardsEl.innerHTML = template(markupWatched);
 }
 
-function openModalLib(id) {
-  modalFilm.classList.remove('visually-hidden');
-  backdrop.addEventListener('click', closeModal);
-  window.addEventListener('keydown', onEscapeKeyDown);
+export function onQueueBtnClick() {
+  let dataToRenderQueue = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
 
-  const watchedFilms = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_WATCHED));
-  const queueFilms = JSON.parse(localStorage.getItem(FILMOTEKA_KEY_QUEUE));
-  watchedFilms.some(el => {
-    if (el.id === Number(id)) {
-      modalContainer.innerHTML = modalTemplates(el);
-      watchedFilms.modalFilm = el;
-    }
-  });
+  watchedBtn.classList.remove('btn-active');
+  queueBtn.classList.add('btn-active');
 
-  queueFilms.some(el => {
-    if (el.id === Number(id)) {
-      modalContainer.innerHTML = modalTemplates(el);
-      queueFilms.modalFilm = el;
-    }
-  });
-}
-
-function closeModal(event) {
-  if (
-    event.target.classList.contains('backdrop') ||
-    event.target.classList.contains('modal__close-btn')
-  ) {
-    hideModal();
+  if (!dataToRenderQueue.length) {
+    cardsEl.innerHTML =
+      '<h1 class="title-queue">Your queue is empty</h1><img src="https://image.tmdb.org/t/p/w500/wjYOUKIIOEklJJ4xbbQVRN6PRly.jpg"></img>';
+    return;
   }
-}
-function hideModal() {
-  modalFilm.classList.add('visually-hidden');
-  backdrop.removeEventListener('click', closeModal);
-  window.removeEventListener('keydown', onEscapeKeyDown);
-}
-function onEscapeKeyDown(event) {
-  if (event.code === 'Escape') {
-    hideModal();
-  }
+
+  const markupQueue = movieDatabase.createCardsMarkup(dataToRenderQueue);
+  cardsEl.innerHTML = template(markupQueue);
 }
