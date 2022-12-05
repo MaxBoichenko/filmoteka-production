@@ -5,4 +5,6 @@ import './js/components/modal/modal';
 import './js/components/theme';
 import './js/components/students-modal';
 
+import './js/components/spinner';
+
 import './js/components/go-to-top';

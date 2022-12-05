@@ -3,6 +3,7 @@ import { scrollTo } from '../components/go-to-top';
 
 import template from '../../templates/cards.hbs';
 import Notiflix from 'notiflix';
+import { spinnerOff, spinnerOn } from '../components/spinner';
 
 import { refs } from '../refs/refs';
 const { form, cardsEl } = refs;
@@ -22,21 +23,27 @@ async function onSubmitForm(event) {
   event.target.formInput.value = '';
 
   if (!query) {
+    
     Notiflix.Notify.info('Введите что-то');
     return;
   }
   pagination.off('afterMove', loadMoreTrendingFilms);
   pagination.off('afterMove', loadMoreByQuery);
   try {
+    spinnerOn();
     const data = await movieDatabase.fetchFilms(page);
-
+    
     if (data.results.length) {
+      spinnerOff();
       pagination.reset(data.total_results);
       pagination.on('afterMove', loadMoreByQuery);
 
       const markup = movieDatabase.createCardsMarkup(data.results);
       cardsEl.innerHTML = template(markup);
+      
+       
     } else {
+      spinnerOff();
       Notiflix.Notify.info('Такие фильмы найти не удалось!');
     }
   } catch (error) {
