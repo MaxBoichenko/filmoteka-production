@@ -35,6 +35,7 @@ export class MovieDatabase {
     } catch (error) {
       console.error(error);
     }
+    
   }
   async fetchTrendingFilms(page) {
     try {
